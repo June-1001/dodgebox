@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Dodgebox</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap"
+      rel="stylesheet"
+    />
+    <link href="https://fonts.googleapis.com/css2?family=Orbit&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles/main.css" />
+  </head>
+  <body>
+    <div id="title">
+      DODGEBOX
+      <a href="https://github.com/June-1001/dodgebox" target="_blank"> Dodgebox Github </a>
+    </div>
+    <div id="game_container">
+      <video id="background_video" autoplay loop muted playsinline>
+        <source src="assets/galaxy_loop_pixabay.mp4" type="video/mp4" />
+      </video>
+
+      <!-- 메인 화면 버튼 -->
+      <button id="start_button">시작</button>
+      <button id="shop_button">SHOP</button>
+      <button id="help_button">게임 설명</button>
+      <div id="costume_notice">코스튬이 해금되었습니다</div>
+      <button id="costume_button">코스튬</button>
+      <!-- 메인 화면 버튼 -->
+
+      <!-- 상점 modal -->
+      <div id="shop_modal">
+        <h2>UPGRADES</h2>
+        <div style="color: white; margin-bottom: 10px; font-size: 20px">
+          보유 코인: <span id="coin_display" style="color: gold">0</span>
+        </div>
+        <div id="shop_items"></div>
+        <button class="close_button" id="close_shop" style="font-size: 20px">Close</button>
+      </div>
+      <!-- 상점 modal -->
+
+      <!-- 게임 설명 modal -->
+      <div id="help_modal">
+        <h1>조작법</h1>
+        <p>이동 : WASD / 방향키<br />발사 : 마우스 방향 자동 발사</p>
+        <h1>게임 플레이</h1>
+        <p>
+          점수는 초당 10점씩 획득할 수 있으며,<br />적을 없앨 때마다 점수를 획득할 수 있습니다.<br /><br />
+          적들은 생성될 때마다 체력이 늘어나고,<br />점수가 높아질수록 적들이 더 빠르게 움직이고 더
+          자주 생성됩니다.<br /><br />
+          게임 종료 시 점수 10점마다 1코인을 획득할 수 있고,<br />획득한 코인으로 상점에서 캐릭터를
+          강화할 수 있습니다.<br />
+        </p>
+        <button class="close_button" id="close_help" style="font-size: 20px">Close</button>
+      </div>
+      <!-- 게임 설명 modal -->
+
+      <!-- 코스튬 modal -->
+      <div id="costume_modal">
+        <h2>Costumes</h2>
+        <div id="costume_container"></div>
+        <button class="close_button" id="close_costume" style="font-size: 20px">Close</button>
+      </div>
+      <!-- 코스튬 modal -->
+
+      <div id="comment_start">Press Space Bar to Start</div>
+      <div id="center_overlay">
+        <div id="final_score"></div>
+        <button id="restart_button">시작 화면으로</button>
+      </div>
+      <div id="comment_restart">Press Space Bar to Restart</div>
+    </div>
+    <div id="score_display"></div>
+
+    <script type="module" src="source/main.js"></script>
+
+    <!-- 모듈화 작업 이전 작업하던 단일 파일 스크립트 -->
+    <!-- <script src="dodgebox.js"></script> -->
+  </body>
+</html>

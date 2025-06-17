@@ -1,0 +1,608 @@
+* {
+  gap: 0;
+  margin: 0;
+  box-sizing: border-box;
+  user-select: none;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #222;
+  color: white;
+  font-family: "Orbitron";
+  font-weight: bold;
+  text-align: center;
+  margin: 20px;
+}
+
+#title {
+  position: relative;
+  align-content: center;
+  width: 900px;
+  height: 80px;
+  box-shadow: 0 0 4px white;
+  font-size: 60px;
+  font-weight: bold;
+  text-shadow: 0 0 12px rgb(255, 0, 0);
+}
+
+#title a {
+  position: absolute;
+  right: 1%;
+  bottom: 0%;
+  transform: translateY(-50%);
+  font-size: 18px;
+  color: white;
+  text-shadow: 0 0 4px white;
+  text-decoration: none;
+}
+
+#background_video {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  height: 100%;
+  width: auto;
+  transform: translateX(-50%);
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.3;
+}
+
+button {
+  cursor: url("../assets/cross_aim.png") 32 32, default;
+}
+
+#game_container {
+  position: relative;
+  box-shadow: 0 0 4px white;
+  width: 900px;
+  height: 720px;
+  overflow: hidden;
+  cursor: url("../assets/cross_aim.png") 32 32, default;
+}
+
+#game_container canvas {
+  position: absolute;
+  background: transparent;
+  display: block;
+  cursor: url("../assets/cross_aim.png") 32 32, default;
+}
+
+#start_button {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  padding: 10px 30px;
+  font-size: 24px;
+  font-weight: bold;
+  background-color: #0000;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 0 8px white;
+  text-shadow: 0 0 4px white;
+  z-index: 10;
+  transition: all 0.3s;
+}
+
+#start_button:hover {
+  background-color: #5555;
+}
+
+#center_overlay {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  display: none;
+  z-index: 10;
+}
+
+#final_score {
+  font-size: 24px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  margin-bottom: 15px;
+}
+
+#restart_button {
+  padding: 10px 30px;
+  font-size: 24px;
+  font-weight: bold;
+  background-color: #0000;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 0 8px white;
+  text-shadow: 0 0 4px white;
+}
+
+#score_display {
+  margin-top: 10px;
+  font-size: 22px;
+  letter-spacing: 1px;
+  font-weight: bold;
+  text-shadow: 0 0 8px rgba(0, 255, 255, 0.8);
+}
+
+.close_button {
+  position: relative;
+  color: white;
+  width: 100px;
+  height: 60px;
+  font-family: "Orbitron";
+  font-size: 16px;
+  font-weight: bold;
+  align-content: center;
+  text-align: center;
+  height: 60px;
+  transition: all 0.3s;
+}
+
+/* ------------------------------------------ */
+/* 메인 메뉴 및 재시작 시 보여질 설명 텍스트 CSS */
+/* ------------------------------------------ */
+
+#comment_start {
+  display: none;
+  position: absolute;
+  top: 65%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 24px;
+  font-weight: bold;
+  text-shadow: 0 0 10px rgba(255, 255, 0, 0.8);
+}
+
+#comment_start .controls {
+  font-size: 16px;
+  text-shadow: 0 0 10px rgba(0, 255, 0, 0.8);
+}
+
+#comment_restart {
+  display: none;
+  position: absolute;
+  top: 65%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 24px;
+  font-weight: bold;
+  text-shadow: 0 0 10px rgba(255, 0, 0, 0.8);
+}
+
+/* -------- */
+/* 상점 기능 */
+/* -------- */
+
+#shop_button {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.5);
+  left: 20px;
+  top: 20px;
+  padding: 5px 15px;
+  width: auto;
+  height: 50px;
+  color: gold;
+  border: 1px solid gold;
+  border-radius: 8px;
+  z-index: 10;
+  transition: all 0.3s;
+  display: none;
+  align-content: center;
+  box-shadow: 0 0 5px gold;
+  font-family: "Orbitron";
+  font-size: 20px;
+  font-weight: bold;
+  text-shadow: 0 0 5px gold;
+  cursor: url("../assets/cross_aim.png") 32 32, default;
+}
+
+#shop_button:hover {
+  background-color: rgba(100, 100, 0, 0.5);
+  box-shadow: 0 0 5px gold;
+  transform: scale(1.05);
+}
+
+#shop_modal {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 700px;
+  transform: translate(-50%, -50%);
+  background-color: #222;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.7);
+  z-index: 20;
+  color: white;
+  font-family: "Orbitron";
+  border: 1px solid gold;
+  overflow: hidden;
+}
+
+#shop_modal h2 {
+  font-family: "Orbitron";
+  color: gold;
+  text-align: center;
+  margin-bottom: 20px;
+  text-shadow: 0 0 5px gold;
+}
+
+#shop_modal button:not(.close_button) {
+  margin-top: 15px;
+  padding: 0px 20px;
+  background-color: rgba(255, 215, 0, 0.2);
+  color: white;
+  border: 1px solid gold;
+  border-radius: 5px;
+  font-family: "Orbitron";
+  font-weight: bold;
+  text-align: center;
+  transition: all 0.3s;
+}
+
+#close_shop {
+  position: relative;
+  margin-top: 15px;
+  background-color: rgba(255, 215, 0, 0.2);
+  box-shadow: 0 0 5px gold;
+  color: white;
+  border: 2px solid gold;
+  border-radius: 4px;
+  width: 100px;
+  height: 60px;
+  font-family: "Orbitron";
+  font-size: 16px;
+  font-weight: bold;
+  align-content: center;
+  height: 60px;
+  transition: all 0.3s;
+}
+
+#shop_modal button:hover {
+  background-color: rgba(255, 215, 0, 0.4);
+}
+
+#shop_items {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  justify-items: center;
+}
+
+.shop-item {
+  background-color: rgba(50, 50, 50, 0.7);
+  padding: 15px;
+  border-radius: 8px;
+  border: 1px solid #444;
+  width: 100%;
+  height: 100%;
+}
+
+.shop-item h3 {
+  margin: 0 0 5px 0;
+  color: gold;
+}
+
+.shop-item p {
+  margin: 5px 0;
+  color: #ddd;
+  font-size: 14px;
+}
+
+.shop-item button {
+  position: relative;
+  padding: 5px 8px;
+  background-color: rgba(0, 150, 0, 0.7);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-family: "Orbitron";
+  font-size: 16px;
+  align-content: center;
+  height: 60px;
+}
+
+.shop-item button:disabled {
+  background-color: rgba(100, 100, 100, 0.7);
+}
+
+.shop-item button:hover:not(:disabled) {
+  background-color: rgba(0, 200, 0, 0.7);
+  transform: scale(1.05);
+}
+
+/* ---------- */
+/* 도움말 기능 */
+/* ---------- */
+
+#help_button {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.5);
+  right: 20px;
+  top: 20px;
+  padding: 5px 15px;
+  width: auto;
+  height: 50px;
+  color: lightblue;
+  border: 1px solid lightblue;
+  border-radius: 8px;
+  z-index: 10;
+  transition: all 0.3s;
+  display: none;
+  align-content: center;
+  box-shadow: 0 0 5px lightblue;
+  font-family: "Orbitron";
+  font-size: 20px;
+  font-weight: bold;
+  text-shadow: 0 0 5px lightblue;
+  cursor: url("../assets/cross_aim.png") 32 32, default;
+}
+
+#help_button:hover {
+  background-color: rgba(0, 100, 100, 0.5);
+  box-shadow: 0 0 5px lightblue;
+  transform: scale(1.05);
+}
+
+#help_modal {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 600px;
+  height: 600px;
+  transform: translate(-50%, -50%);
+  background-color: #222;
+
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0, 215, 255, 0.7);
+  z-index: 20;
+  text-align: center;
+  align-content: center;
+  color: white;
+  font-family: "Orbitron";
+  font-size: 20px;
+  border: 1px solid lightblue;
+  overflow: hidden;
+}
+
+#help_modal h1 {
+  font-size: 30px;
+  padding-bottom: 30px;
+}
+
+#help_modal p {
+  padding-bottom: 40px;
+}
+
+#close_help {
+  position: relative;
+  transform: translateY(-2px);
+  background-color: rgba(0, 100, 100, 0.3);
+  box-shadow: 0 0 5px lightblue;
+  color: white;
+  border: 2px solid lightblue;
+  border-radius: 4px;
+  width: 100px;
+  height: 60px;
+  font-family: "Orbitron";
+  font-size: 16px;
+  font-weight: bold;
+  align-content: center;
+  height: 60px;
+  transition: all 0.3s;
+}
+
+#close_help:hover {
+  background-color: rgba(0, 100, 150, 0.5);
+}
+
+/* ---------- */
+/* 코스튬 기능 */
+/* ---------- */
+
+#costume_button {
+  display: none;
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.5);
+  left: 20px;
+  bottom: 20px;
+  padding: 5px 15px;
+  width: auto;
+  height: 50px;
+  color: lightgreen;
+  border: 1px solid lightgreen;
+  border-radius: 8px;
+  z-index: 10;
+  transition: all 0.3s;
+  align-content: center;
+  box-shadow: 0 0 5px lightgreen;
+  font-family: "Orbitron";
+  font-size: 20px;
+  font-weight: bold;
+  text-shadow: 0 0 5px lightgreen;
+  cursor: url("../assets/cross_aim.png") 32 32, default;
+}
+
+#costume_button:hover {
+  background-color: rgba(0, 100, 50, 0.5);
+  box-shadow: 0 0 5px lightgreen;
+  transform: scale(1.05);
+}
+
+#costume_modal {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 800px;
+  height: 600px;
+  transform: translate(-50%, -50%);
+  background-color: #222;
+
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0, 255, 150, 0.7);
+  z-index: 20;
+  text-align: center;
+  align-content: center;
+  color: white;
+  font-family: "Orbitron";
+  font-size: 20px;
+  border: 1px solid lightgreen;
+  overflow: hidden;
+}
+
+#costume_modal h2 {
+  font-family: "Orbitron";
+  color: lightgreen;
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 5px;
+  text-shadow: 0 0 5px lightgreen;
+  transform: translate(0, -120%);
+}
+
+#close_costume {
+  position: absolute;
+  left: 50%;
+  bottom: -20px;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 100, 0, 0.3);
+  box-shadow: 0 0 5px lightgreen;
+  border: 2px solid lightgreen;
+  border-radius: 4px;
+}
+
+#close_costume:hover {
+  background-color: rgba(0, 100, 50, 0.5);
+}
+
+#costume_notice {
+  position: absolute;
+  display: none;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 30px;
+  color: white;
+  text-shadow: 0 0 6px lightgreen;
+  background-color: #333;
+  border: 2px solid lightgreen;
+  border-radius: 8px;
+  box-shadow: 0 0 8px lightgreen;
+  padding: 40px;
+  z-index: 9999;
+}
+
+#costume_container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  padding: 10px;
+  justify-content: center;
+  align-items: center;
+  justify-items: center;
+  align-content: start;
+  transform: translate(0, -8%);
+}
+
+.costume_wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  flex: 0 0 auto;
+  width: 200px;
+  height: 220px;
+  padding: 5px;
+  margin: 0;
+  border-radius: 10px;
+
+  background-color: rgba(0, 50, 0, 0.3);
+  border: 1px solid lightgreen;
+  box-shadow: 0 0 8px rgba(0, 255, 100, 0.5);
+
+  font-family: "Orbitron";
+  color: lightgreen;
+  text-align: center;
+  transition: all 0.3s;
+}
+
+.costume_wrapper.disabled {
+  opacity: 0.6;
+  pointer-events: none;
+  filter: grayscale(90%);
+  user-select: none;
+}
+
+.costume_wrapper:hover:not(.selected) {
+  transform: scale(1.05);
+  background-color: #0f92;
+}
+
+.costume_wrapper.selected {
+  border: 4px solid #fff;
+  box-shadow: 0 0 8px #fff;
+  transform: scale(1.05);
+  z-index: 5;
+}
+
+.costume_wrapper.unlockable {
+  cursor: pointer;
+  border: 2px dashed gold;
+  background-color: rgba(50, 50, 0, 0.3);
+  box-shadow: 0 0 8px rgba(255, 215, 0, 0.5);
+}
+
+.costume_wrapper.unlockable canvas {
+  filter: grayscale(90%);
+}
+
+.costume_wrapper.unlockable:hover {
+  transform: scale(1.05);
+  background-color: rgba(255, 215, 0, 0.3);
+  box-shadow: 0 0 12px rgba(255, 215, 0, 0.7);
+}
+
+.costume_canvas {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  display: block;
+  margin-top: 8px;
+  background-color: black;
+  border: 1px solid lightgreen;
+  box-shadow: 0 0 5px lightgreen;
+  border-radius: 6px;
+}
+
+.costume_spacer {
+  width: 100px;
+  height: 120px;
+}
+
+.costume_name {
+  width: 100%;
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 5px;
+  text-shadow: 0 0 5px lightgreen;
+}
+
+.costume_description {
+  width: 100%;
+  font-size: 14px;
+  color: #90ff90;
+  text-shadow: 0 0 5px lightgreen;
+}
